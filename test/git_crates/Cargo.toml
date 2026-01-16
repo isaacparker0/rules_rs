@@ -14,3 +14,5 @@ tokenizers = { git = "https://github.com/huggingface/tokenizers", rev = "007fc76
 # TODO(zbarsky): Can remov this one bitflags handling above is fixed
 o2o = { git = "https://github.com/Artem-Romanenia/o2o", rev = "3fa37f788547fdeb50750e307f861d2d86f37ec8"}
 wirefilter-engine = { git = "https://github.com/cloudflare/wirefilter", package = "wirefilter-engine" }
+# Test workspace with [workspace] but no [workspace.dependencies] section
+salsa = { git = "https://github.com/salsa-rs/salsa.git", rev = "9860ff6ca0f1f8f3a8d6b832020002790b501254", default-features = false }

@@ -208,15 +208,17 @@ def _compute_strip_prefix(annotation, cargo_toml_json, name):
     if not strip_prefix and name in workspace["members"]:
         strip_prefix = name
 
+    workspace_deps = workspace.get("dependencies", {})
+
     if not strip_prefix:
         # Handle `uv-python = { path = "crates/uv-python" }` when `members` includes wildcard.
-        dep = workspace["dependencies"].get(name)
+        dep = workspace_deps.get(name)
         if type(dep) == "dict":
             strip_prefix = dep["path"]
 
     if not strip_prefix:
         # Handle `wirefilter = { path = "engine", package = "wirefilter-engine" }` when crate is aliased internally.
-        for dep in workspace["dependencies"].values():
+        for dep in workspace_deps.values():
             if type(dep) == "dict" and dep.get("package") == name:
                 strip_prefix = dep["path"]
                 break
